@@ -20,5 +20,12 @@ from myapp.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('hospital/',hospital),
+    path('home/',home, name='home'),
+    path('book/',book_appointment, name='book'),
+    path('register/',register, name="register"),
+    path('login/',user_login, name="login"),
+    path('logout/',user_logout, name="logout"),
+    path('dashboard/',dashboard, name="dashboard"),
+
+  
 ]

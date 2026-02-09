@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Book Appointment</title>
+</head>
+<body>
+<h2>Book Appointment</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <label>Doctor:</label>
+    <select name="doctor">
+        {% for doctor in doctors %}
+        <option value="{{ doctor.id }}">{{ doctor.user.username }}</option>
+        {% endfor %}
+    </select><br><br>
+
+    <label>Date:</label>
+    <input type="date" name="date"><br><br>
+
+    <label>Time:</label>
+    <input type="time" name="time"><br><br>
+
+    <button type="submit">Book</button>
+</form>
+
+</body>
+</html>

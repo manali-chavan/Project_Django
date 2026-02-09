@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6dd5ed, #2193b0);
+            font-family: "Segoe UI", Tahoma, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .register-box {
+            width: 400px;
+            background: #ffffff;
+            padding: 28px 30px;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .register-box h2 {
+            text-align: center;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        .register-box p {
+            text-align: center;
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-top: 14px;
+            font-weight: 600;
+            color: #34495e;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #2193b0;
+            box-shadow: 0 0 0 2px rgba(33,147,176,0.2);
+        }
+
+        .hint {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 4px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 22px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #2193b0;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #1b7c95;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 13px;
+        }
+
+        .footer-text a {
+            color: #2193b0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    
+</head>
+<body>
+    <h2>Register</h2>
+
+<form method="post">
+{% csrf_token %}
+
+Role:
+<select name="role">
+    <option value="doctor">Doctor</option>
+    <option value="patient">Patient</option>
+</select><br><br>
+
+Username: <input type="text" name="username"><br><br>
+Password: <input type="password" name="password"><br><br>
+Phone: <input type="text" name="phone"><br><br>
+
+<!-- Doctor fields -->
+Specialization: <input type="text" name="specialization"><br><br>
+
+<!-- Patient fields -->
+Age: <input type="number" name="age"><br><br>
+Gender: <input type="text" name="gender"><br><br>
+Address: <input type="text" name="address"><br><br>
+
+<button type="submit">Register</button>
+</form>
+
+</body>
+</html>
