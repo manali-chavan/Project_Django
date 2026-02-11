@@ -3,134 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register</title>
+
     <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
         body {
-            margin: 0;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
             min-height: 100vh;
-            background: linear-gradient(135deg, #6dd5ed, #2193b0);
-            font-family: "Segoe UI", Tahoma, sans-serif;
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            margin: 0;
         }
 
-        .register-box {
-            width: 400px;
-            background: #ffffff;
-            padding: 28px 30px;
-            border-radius: 12px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        .container {
+            background: #fff;
+            width: 100%;
+            max-width: 500px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
 
-        .register-box h2 {
+        h2 {
             text-align: center;
-            margin-bottom: 5px;
-            color: #2c3e50;
+            margin-bottom: 20px;
+            color: #333;
         }
 
-        .register-box p {
-            text-align: center;
-            font-size: 14px;
-            color: #7f8c8d;
-            margin-bottom: 22px;
+        .form-group {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
         label {
-            display: block;
-            margin-top: 14px;
-            font-weight: 600;
-            color: #34495e;
-            font-size: 14px;
+            font-weight: bold;
+            color: #555;
         }
 
         input, select {
-            width: 100%;
             padding: 10px;
-            margin-top: 6px;
             border-radius: 6px;
             border: 1px solid #ccc;
+            width: 100%;
             font-size: 14px;
-        }
-
-        input::placeholder {
-            color: #aaa;
         }
 
         input:focus, select:focus {
             outline: none;
-            border-color: #2193b0;
-            box-shadow: 0 0 0 2px rgba(33,147,176,0.2);
-        }
-
-        .hint {
-            font-size: 12px;
-            color: #7f8c8d;
-            margin-top: 4px;
+            border-color: #6c63ff;
         }
 
         button {
             width: 100%;
-            margin-top: 22px;
             padding: 12px;
+            background: #6c63ff;
+            color: white;
             border: none;
-            border-radius: 8px;
-            background-color: #2193b0;
-            color: #fff;
+            border-radius: 6px;
             font-size: 16px;
-            font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            margin-top: 10px;
         }
 
         button:hover {
-            background-color: #1b7c95;
+            background: #574fd6;
         }
 
-        .footer-text {
-            text-align: center;
-            margin-top: 18px;
-            font-size: 13px;
-        }
+        /* Mobile view */
+        @media (max-width: 480px) {
+            .form-group {
+                grid-template-columns: 1fr;
+            }
 
-        .footer-text a {
-            color: #2193b0;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .footer-text a:hover {
-            text-decoration: underline;
+            label {
+                margin-bottom: 6px;
+            }
         }
     </style>
-    
 </head>
 <body>
+
+<div class="container">
     <h2>Register</h2>
 
-<form method="post">
-{% csrf_token %}
+    <form method="post">
+        {% csrf_token %}
 
-Role:
-<select name="role">
-    <option value="doctor">Doctor</option>
-    <option value="patient">Patient</option>
-</select><br><br>
+        <div class="form-group">
+            <label>Role</label>
+            <select name="role">
+                <option value="doctor">Doctor</option>
+                <option value="patient">Patient</option>
+            </select>
+        </div>
 
-Username: <input type="text" name="username"><br><br>
-Password: <input type="password" name="password"><br><br>
-Phone: <input type="text" name="phone"><br><br>
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username">
+        </div>
 
-<!-- Doctor fields -->
-Specialization: <input type="text" name="specialization"><br><br>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password">
+        </div>
 
-<!-- Patient fields -->
-Age: <input type="number" name="age"><br><br>
-Gender: <input type="text" name="gender"><br><br>
-Address: <input type="text" name="address"><br><br>
+        <div class="form-group">
+            <label>Phone</label>
+            <input type="text" name="phone">
+        </div>
 
-<button type="submit">Register</button>
-</form>
+        <div class="form-group">
+            <label>Specialization</label>
+            <input type="text" name="specialization">
+        </div>
+
+        <div class="form-group">
+            <label>Age</label>
+            <input type="number" name="age">
+        </div>
+
+        <div class="form-group">
+            <label>Gender</label>
+            <input type="text" name="gender">
+        </div>
+
+        <div class="form-group">
+            <label>Address</label>
+            <input type="text" name="address">
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
+</div>
 
 </body>
 </html>
