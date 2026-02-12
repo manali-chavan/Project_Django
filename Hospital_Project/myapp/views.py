@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import Doctor, Appointment, Patient
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 def home(request):
@@ -74,16 +75,19 @@ def register(request):
     return render(request, 'myapp/register.html')
 
 
+
 def user_login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
         user = authenticate(request, username=username, password=password)
 
-        if user:
+        if user is not None:
             login(request, user)
             return redirect('dashboard')
+        else:
+            messages.error(request, "Invalid username or password")
 
     return render(request, 'myapp/login.html')
 

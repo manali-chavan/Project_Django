@@ -31,8 +31,17 @@
         }
 
         h2 {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             color: #333;
+        }
+
+        .error-message {
+            background-color: #ffe5e5;
+            color: #d8000c;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
         }
 
         .form-group {
@@ -88,7 +97,6 @@
             text-decoration: underline;
         }
 
-        /* Mobile responsiveness */
         @media (max-width: 480px) {
             .container {
                 padding: 20px;
@@ -105,17 +113,26 @@
 <div class="container">
     <h2>Login</h2>
 
+    <!-- Display Error Messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="error-message">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
     <form method="post">
         {% csrf_token %}
 
         <div class="form-group">
             <label>Username</label>
-            <input type="text" name="username">
+            <input type="text" name="username" required>
         </div>
 
         <div class="form-group">
             <label>Password</label>
-            <input type="password" name="password">
+            <input type="password" name="password" required>
         </div>
 
         <button type="submit">Login</button>
