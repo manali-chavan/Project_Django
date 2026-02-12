@@ -1,21 +1,28 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import Doctor, Appointment, Patient
+from django.contrib.auth.decorators import login_required
+
 
 def home(request):
     doctors = Doctor.objects.all()
     return render(request, 'myapp/home.html', {'doctors': doctors})
 
 
+@login_required
 def book_appointment(request):
-    if request.method == 'POST':
-        doctor_id = request.POST['doctor']
-        date = request.POST['date']
-        time = request.POST['time']
 
-        doctor = Doctor.objects.get(id=doctor_id)
-        patient = Patient.objects.get(user=request.user)
+    if not hasattr(request.user, 'patient'):
+        return redirect('dashboard')  # or show error
+
+    if request.method == 'POST':
+        doctor_id = request.POST.get('doctor')
+        date = request.POST.get('date')
+        time = request.POST.get('time')
+
+        doctor = get_object_or_404(Doctor, id=doctor_id)
+        patient = request.user.patient
 
         Appointment.objects.create(
             doctor=doctor,
@@ -23,10 +30,12 @@ def book_appointment(request):
             date=date,
             time=time
         )
-        return redirect('home')
+
+        return redirect('dashboard')
 
     doctors = Doctor.objects.all()
     return render(request, 'myapp/book.html', {'doctors': doctors})
+
 
 
 def register(request):
