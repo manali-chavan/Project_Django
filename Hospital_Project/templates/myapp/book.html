@@ -1,28 +1,95 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Book Appointment</title>
-</head>
-<body>
-<h2>Book Appointment</h2>
+{% extends 'myapp/base.html' %}
 
-<form method="post">
-    {% csrf_token %}
-    <label>Doctor:</label>
-    <select name="doctor">
-        {% for doctor in doctors %}
-        <option value="{{ doctor.id }}">{{ doctor.user.username }}</option>
-        {% endfor %}
-    </select><br><br>
+{% block title %}Book Appointment{% endblock %}
 
-    <label>Date:</label>
-    <input type="date" name="date"><br><br>
+{% block content %}
 
-    <label>Time:</label>
-    <input type="time" name="time"><br><br>
+<style>
+    .container {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 450px;
+        margin: 40px auto;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
 
-    <button type="submit">Book</button>
-</form>
+    .container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
 
-</body>
-</html>
+    .container label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 6px;
+        margin-top: 15px;
+    }
+
+    .container select,
+    .container input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    .container select:focus,
+    .container input:focus {
+        border-color: #4e73df;
+        outline: none;
+        box-shadow: 0 0 5px rgba(78,115,223,0.4);
+    }
+
+    .container button {
+        width: 100%;
+        margin-top: 20px;
+        padding: 12px;
+        background: #4e73df;
+        border: none;
+        border-radius: 8px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .container button:hover {
+        background: #2e59d9;
+    }
+
+    @media (max-width: 480px) {
+        .container {
+            padding: 20px;
+        }
+    }
+</style>
+
+<div class="container">
+    <h2>Book Appointment</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label>Doctor:</label>
+        <select name="doctor" required>
+            {% for doctor in doctors %}
+            <option value="{{ doctor.id }}">{{ doctor.user.username }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Date:</label>
+        <input type="date" name="date" required>
+
+        <label>Time:</label>
+        <input type="time" name="time" required>
+
+        <button type="submit">Book Appointment</button>
+    </form>
+</div>
+
+{% endblock %}
